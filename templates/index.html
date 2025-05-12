@@ -6,6 +6,27 @@
     <title>Projeto Backend</title>
 </head>
 <body>
-    
+    <h1>Adicionar Nova Tarefa</h1>
+    <form action="/create" method="POST">
+        <input type="text" name="description" required>
+        <button type="submit">Criar Tarefa</button>
+    </form>
+
+    <h1>Lista de Tarefas</h1>
+    <ul>
+        {% for task in tasks %}
+        <li>
+            {{ task.description }}
+            <form action="/update/{{ task.id }}" method="POST" style="display: inline;">
+                <input type="text" name="description" value="{{ task.description }}">
+                <button type="submit">Atualizar</button>
+            </form>
+
+            <form action="/delete/{{ task.id }}" method="POST" style="display: inline;">
+                <button type="submit">Excluir</button>
+            </form>
+        </li>
+    {% endfor %}
+    </ul>
 </body>
 </html>
